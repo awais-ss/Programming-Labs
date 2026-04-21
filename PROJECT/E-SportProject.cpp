@@ -156,13 +156,18 @@ int main()
                                 if (isfound)
                                 {
 
-                                    arr_player_name[index] = "";
-                                    arr_player_age[index] = 0;
-                                    arr_player_level[index] = 0;
-                                    arr_player_kills[index] = 0;
-                                    arr_player_win_count[index] = 0;
-                                    arr_player_total_games[index] = 0;
-                                    arr_player_win_rate[index] = 0;
+                                    for (int i = index; i < a - 1; i++)
+                                    {
+                                        arr_player_name[i] = arr_player_name[i + 1];
+                                        arr_player_age[i] = arr_player_age[i + 1];
+                                        arr_player_level[i] = arr_player_level[i + 1];
+                                        arr_player_kills[i] = arr_player_kills[i + 1];
+                                        arr_player_win_count[i] = arr_player_win_count[i + 1];
+                                        arr_player_total_games[i] = arr_player_total_games[i + 1];
+                                        arr_player_win_rate[i] = arr_player_win_rate[i + 1];
+                                    }
+
+                                    a--;
                                     cout << endl
                                          << search_name << "'s DATA HAS BEEN DELETED" << endl
                                          << endl;
@@ -193,7 +198,6 @@ int main()
                                         break;
                                     }
                                 }
-
                                 if (isfound)
                                 {
                                     // cout << "NAME\tAGE\tLEVEL\tKILLS\tWINS\tTOTAL GAMES\t" << endl;
@@ -505,7 +509,7 @@ int main()
                 // cout << "ENTER YOUR TOTAL GAMES (MUST 5):";
                 // cin >>
                 arr_player_total_games[a] = 5;
-                for (int a = 0; a < a; a++)
+                for (int i = 0; i < a; i++)
                 {
                     arr_player_win_rate[a] = (arr_player_win_count[a] / arr_player_total_games[a]) * 100;
                 }
@@ -536,10 +540,3 @@ int main()
         }
     }
 }
-/*
-future plan
-delete row shows 0
-why user entered data has 0 winrate
-why the view record(option one for admin) automatically update when we sort by level/winrate/kills
-wanna build a you're seected or not part in user menu
-*/
