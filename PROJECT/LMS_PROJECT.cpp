@@ -22,8 +22,16 @@ int main()
     float ATTENDENCE_ARRAY[students_number] = {88.5, 92.0, 75.5, 80.0, 70.0};
     float GPA_ARRAY[students_number] = {3.8, 3.9, 3.2, 2.8, 3.7};
 
-    string PROF_ANNOUNCEMENT_ARRAY[3];
-    string STUD_FEEDBACK_ARRAY[3];
+    string PROF_ANNOUNCEMENT_ARRAY[3] = {
+        "NO ANNOUNCEMENT HERE",
+        "NO ANNOUNCEMENT HERE",
+        "NO ANNOUNCEMENT HERE",
+    };
+    string STUD_FEEDBACK_ARRAY[3] = {
+        "NO FEEDBACK HERE",
+        "NO FEEDBACK HERE",
+        "NO FEEDBACK HERE",
+    };
     cout << "------------------------------------------------------------" << endl;
     cout << "|            UNIVERSITY LEARNING MANAGEMENT SYSTEM         |" << endl;
     cout << "|                 (UET LAHORE - CS DEPARTMENT)             |" << endl;
@@ -53,11 +61,13 @@ int main()
                 cin >> password;
                 if (username == "ADMIN" && password == 123)
                 {
-                    int prof_choice;
+                    int prof_choice = 0;
+
                     while (prof_choice != 10)
                     {
                         // PROFESSOR MENU
                         system("CLS");
+                        cout << "-------------------------------------------------------------";
                         cout << "\n 1.  REGISTER NEW STUDENT";
                         cout << "\n 2.  VIEW ALL REGISTERED STUDENTS";
                         cout << "\n 3.  UPDATE SUBJECT MARKS";
@@ -74,6 +84,8 @@ int main()
                         if (prof_choice == 1)
                         { // REGISTER NEW STUDENT
                             system("CLS");
+
+                            cout << "--------------------------------------------" << endl;
                             cout << "          REGISTER NEW STUDENT              " << endl;
                             cout << "--------------------------------------------" << endl;
 
@@ -87,7 +99,6 @@ int main()
                             // Subjects Names Input
                             cout << "ENTER SUBJECT 1 NAME (PF,DM,AICT,CAL): ";
                             cin >> SUBJECT_1_ARRAY[static_data];
-
                             cout << "ENTER SUBJECT 2 NAME (PF,DM,AICT,CAL): ";
                             cin >> SUBJECT_2_ARRAY[static_data];
 
@@ -99,13 +110,11 @@ int main()
 
                             cout << "ENTER MARKS FOR " << SUBJECT_2_ARRAY[static_data] << ": ";
                             cin >> MARkS_SUBJECT_2_ARRAY[static_data];
-
                             cout << "ENTER MARKS FOR " << SUBJECT_3_ARRAY[static_data] << ": ";
                             cin >> MARkS_SUBJECT_3_ARRAY[static_data];
 
                             cout << "ENTER ATTENDANCE PERCENTAGE (0-100): ";
                             cin >> ATTENDENCE_ARRAY[static_data];
-
                             cout << "ENTER GPA: ";
                             cin >> GPA_ARRAY[static_data];
 
@@ -114,9 +123,8 @@ int main()
 
                             // FOR NEXT STUDENT INDEX
                             static_data++;
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 2)
@@ -137,9 +145,10 @@ int main()
                                      << ATTENDENCE_ARRAY[i] << "\t     "
                                      << GPA_ARRAY[i] << endl;
                             }
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+
+                            cout << "-----------------------------------------------------------------------------------\n";
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 3)
@@ -189,9 +198,8 @@ int main()
                             {
                                 cout << "STUDENT RECORD NOT FOUND";
                             }
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 4)
@@ -261,11 +269,10 @@ int main()
                                      << ATTENDENCE_ARRAY[i] << "\t     "
                                      << GPA_ARRAY[i] << endl;
                             }
-                            
-        cout << "-------------------------------------------------------------\n";
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+
+                            cout << "-----------------------------------------------------------------------------------\n";
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 5)
@@ -298,37 +305,51 @@ int main()
                                      << MARkS_SUBJECT_3_ARRAY[index] << "\t  "
                                      << ATTENDENCE_ARRAY[index] << "\t     "
                                      << GPA_ARRAY[index] << endl;
+                                cout << "-----------------------------------------------------------------------------------\n";
                             }
+
                             else
                             {
                                 cout << "STUDENT RECORD NOT FOUND";
                             }
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 6)
                         { // POST NEW ANNOUNCEMENT
                             system("CLS");
-                            int announcement_choice;
+                            int announcement_choice = 0;
+                            cout << "ANNONUCEMENT BOARD:" << endl;
+                            cout << "-----------------------------------------------------------------------------------\n";
+
+                            for (size_t i = 0; i < 3; i++)
+                            {
+                                cout << i + 1 << ": " << PROF_ANNOUNCEMENT_ARRAY[i] << endl
+                                     << endl;
+                            }
+                            cout << "-----------------------------------------------------------------------------------\n";
+
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            getch();
                             while (announcement_choice != 2)
                             {
+                                system("CLS");
                                 cout << "1: ADD ANNOUNCEMENT\n2: EXIT ANOUNCEMENT" << endl;
                                 cout << "CHOOSE:";
-                                int announcement_index=0;
+                                int announcement_index = 0;
                                 cin >> announcement_choice;
                                 if (announcement_choice == 1)
                                 {
+                                    system("CLS");
                                     cout << "NUMBER OF ANNOUNCEMENT:";
                                     int announcement_numbers;
                                     cin >> announcement_numbers;
                                     cin.ignore();
                                     for (int i = 0; i < announcement_numbers; i++)
                                     {
-                                        cout << i + 1 << ": ANNOUNCEMENT >>>";
-                                        getline(cin, PROF_ANNOUNCEMENT_ARRAY[announcement_index]);
-                                       
+                                        cout << i + 1 << ": ANNOUNCEMENT >>>  ";
+                                        getline(cin, PROF_ANNOUNCEMENT_ARRAY[i]);
                                     }
                                 }
                                 else
@@ -336,14 +357,26 @@ int main()
                                     cout << "WRONG CHOICE";
                                 }
                             }
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            system("CLS");
+                            cout << "UPDATED ANNONUCEMENT BOARD:" << endl;
+                            cout << "-----------------------------------------------------------------------------------\n";
+
+                            for (size_t i = 0; i < 3; i++)
+                            {
+                                cout << i + 1 << ": " << PROF_ANNOUNCEMENT_ARRAY[i] << endl;
+                            }
+                            cout << "-----------------------------------------------------------------------------------\n";
+
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 7)
                         { // VIEW ALL PERFORMANCES (average)
                             system("CLS");
+                            cout << "--------------------------------------------" << endl;
+                            cout << "             VIEW PERFORMANCE                " << endl;
+                            cout << "--------------------------------------------" << endl;
                             cout << "TOTAL STUDENTS ARE:" << static_data << endl;
                             cout << "SECTON IS "
                                     "A"
@@ -355,9 +388,8 @@ int main()
                             }
                             float aver_gpa = sum_gpa / static_data;
                             cout << "AVERAGE GPA OF THIS CLASS IS:" << aver_gpa << endl;
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 8)
@@ -392,6 +424,8 @@ int main()
                                      << ATTENDENCE_ARRAY[index] << "\t     "
                                      << GPA_ARRAY[index] << endl
                                      << endl;
+                                cout << "-----------------------------------------------------------------------------------\n";
+
                                 // deletion from here
                                 NAME_ARRAY[index] = "";
                                 SUBJECT_1_ARRAY[index] = "";
@@ -423,37 +457,38 @@ int main()
                             {
                                 cout << "STUDENT RECORD NOT FOUND";
                             }
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 9)
                         { // READ STUDENTS FEEDBACK
                             system("CLS");
+                            cout << "--------------------------------------------" << endl;
+                            cout << "               FEEDBACK BOARD              " << endl;
+                            cout << "--------------------------------------------" << endl
+                                 << endl;
+                            ;
                             for (int i = 0; i < 3; i++)
                             {
                                 cout << STUD_FEEDBACK_ARRAY[i] << endl;
                             }
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else if (prof_choice == 10)
                         { // LOGOUT AND RETURN TO PORTAL
                             cout << "            <<< LOGOUT... >>>            " << endl;
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                         else
                         {
                             cout << "               <<< WRONG CHOICE >>>            " << endl;
-                            cout << "\n           +---------------------------------------+" << endl;
-                            cout << "           |   Press any key to return to Portal   |" << endl;
-                            cout << "           +---------------------------------------+" << endl;
+                            cout << "\n                [>] Press any key to return to Portal..." << endl;
+                            ;
                             getch();
                         }
                     }
@@ -499,10 +534,12 @@ int main()
                 cout << "            WELCOME " << NAME_ARRAY[index] << endl
                      << endl;
                 system("CLS");
-                int stud_choice;
+                int stud_choice = 0;
                 while (stud_choice != 10)
                 {
                     // STUDENT MENU
+                    system("CLS");
+                    cout << "-------------------------------------------------------------\n";
                     cout << "\n 1.  VIEW PROFILE";
                     cout << "\n 2.  VIEW REGISTERED COURSES";
                     cout << "\n 3.  VIEW MY GRADES/MARKS";
@@ -534,9 +571,7 @@ int main()
                              << ATTENDENCE_ARRAY[index] << "\t     "
                              << GPA_ARRAY[index] << endl
                              << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 2)
@@ -547,9 +582,7 @@ int main()
                         cout << SUBJECT_1_ARRAY[index] << "\n"
                              << SUBJECT_2_ARRAY[index] << "\n"
                              << SUBJECT_3_ARRAY[index] << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 3)
@@ -560,9 +593,7 @@ int main()
                         cout << SUBJECT_1_ARRAY[index] << " MARKS ARE:" << MARkS_SUBJECT_1_ARRAY[index] << endl;
                         cout << SUBJECT_2_ARRAY[index] << " MARKS ARE:" << MARkS_SUBJECT_2_ARRAY[index] << endl;
                         cout << SUBJECT_3_ARRAY[index] << " MARKS ARE:" << MARkS_SUBJECT_3_ARRAY[index] << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 4)
@@ -570,9 +601,7 @@ int main()
                         system("CLS");
                         cout << "YOUR ATTENDENCE IS:" << ATTENDENCE_ARRAY[index] << endl;
 
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 5)
@@ -582,9 +611,7 @@ int main()
                         {
                             cout << PROF_ANNOUNCEMENT_ARRAY[i] << endl;
                         }
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 6)
@@ -619,9 +646,7 @@ int main()
                         cout << SUBJECT_1_ARRAY[index] << "\n"
                              << SUBJECT_2_ARRAY[index] << "\n"
                              << SUBJECT_3_ARRAY[index] << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 7)
@@ -642,7 +667,7 @@ int main()
                                     cin.ignore();
                                     for (int i = 0; i < FEEDBACK_numbers; i++)
                                     {
-                                        cout << i + 1 << ": FEEDBACK >>>";
+                                        cout << i + 1 << ": FEEDBACK >>>   ";
                                         getline(cin, STUD_FEEDBACK_ARRAY[i]);
                                     }
                                 }
@@ -651,16 +676,25 @@ int main()
                                     cout << "WRONG CHOICE";
                                 }
                             }
+                            system("CLS");
+                            cout << endl
+                                 << "FEEDBACK BOARD:";
+                            cout << "-----------------------------------------------------------------------------------\n";
+
+                            for (int i = 0; i < 3; i++)
+                            {
+                                cout << i + 1 << ": " << STUD_FEEDBACK_ARRAY[i] << endl;
+                            }
+                            cout << "-----------------------------------------------------------------------------------\n";
                         }
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 8)
                     { // CALCULATE GPA
                         system("CLS");
                         float sub1, sub2, sub3, gpa_calculator;
+                        cout << "-----------------------------------------------------------------------------------\n";
 
                         cout << "ENTER MARKS OF PF:";
                         cin >> sub1;
@@ -668,6 +702,8 @@ int main()
                         cin >> sub2;
                         cout << "ENTER MARKS OF DM:";
                         cin >> sub3;
+                        cout << "-----------------------------------------------------------------------------------\n";
+
                         gpa_calculator = (sub1 * 0.35) + (sub2 * 0.3) + (sub3 * 0.35);
                         float final_gpa = 0.0;
                         if (gpa_calculator > 75)
@@ -695,9 +731,7 @@ int main()
                             final_gpa = 0.0;
                         }
                         cout << "YOUR GPA BASED ON THE MARKS IS:" << final_gpa << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 9)
@@ -714,26 +748,20 @@ int main()
                         cout << "------------------------------------------------------------" << endl;
                         cout << "LOCATION: G.T Road, Lahore, Pakistan" << endl;
                         cout << "------------------------------------------------------------" << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else if (stud_choice == 10)
                     { // LOGOUT AND EXIT TO PORTAL
 
                         cout << "            <<< LOGOUT... >>>            " << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                     else
                     {
                         cout << "               <<< WRONG CHOICE >>>            " << endl;
-                        cout << "\n            +---------------------------------------+" << endl;
-                        cout << "            |   Press any key to return to Portal   |" << endl;
-                        cout << "            +---------------------------------------+" << endl;
+                        cout << "\n                [>] Press any key to return to Portal..." << endl;
                         getch();
                     }
                 }
@@ -742,9 +770,8 @@ int main()
             {
                 system("CLS");
                 cout << "                WRONG ID!" << endl;
-                cout << "\n            +---------------------------------------+" << endl;
-                cout << "            |   Press any key to return to Portal   |" << endl;
-                cout << "            +---------------------------------------+" << endl;
+
+                cout << "\n           [>] Press any key to return to Portal..." << endl;
                 getch();
             }
         }
