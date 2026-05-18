@@ -40,17 +40,16 @@ void submit_feedback();
 void calculate_gpa();
 void view_contact_directory();
 
-// SORTING:
 void swaping_sorting_gpa();
 
 // FILE HANDLING FUNCTIONS
 void add_to_file();
 void delet_from_file();
 void show_from_file();
-void save_announcements(); // <<<1>>>
-void load_announcements(); // <<<1>>>
-void save_feedback();      // <<<1>>>
-void load_feedback();      // <<<1>>>
+void save_announcements();
+void show_from_announcements();
+void save_feedback();
+void show_from_feedback();
 //-----------------------------------PROTOTYPE END----------------------------------------
 
 //-----------------------------------DATA STRUCTURE START--------------------------------------
@@ -59,12 +58,10 @@ int static_data = 0;
 int ID_ARRAY[1000];
 string NAME_ARRAY[1000];
 
-// SUBJECTS NAME
 string SUBJECT_1_ARRAY[1000];
 string SUBJECT_2_ARRAY[1000];
 string SUBJECT_3_ARRAY[1000];
 
-// MARKS
 string MARkS_SUBJECT_1_ARRAY[1000];
 string MARkS_SUBJECT_2_ARRAY[1000];
 string MARkS_SUBJECT_3_ARRAY[1000];
@@ -88,10 +85,10 @@ string STUD_FEEDBACK_ARRAY[3] = {
 int main()
 {
     show_from_file();
-    load_announcements(); // <<<2>>>
-    load_feedback();      // <<<2>>>
+    show_from_announcements();
+    show_from_feedback();
     LMS_HEADER();
-    int choice;
+    int choice = 0;
     while (choice != 3)
     {
         cout << "1: PROFESSOR\n2: STUDENT\n3: EXIT\n";
@@ -110,7 +107,6 @@ int main()
     return 0;
 }
 //-----------------------------------MAIN END--------------------------------------
-// file handling start
 void add_to_file()
 {
     fstream AddToFile;
@@ -136,7 +132,7 @@ void delet_from_file()
     delete_data_from_file.open("DATA-BASE.txt", ios::out); // out beacuse it remove all data from file
     if (delete_data_from_file.is_open())
     {
-        for (int i = 0; i < static_data; i++) // again write data from idx 0
+        for (int i = 0; i < static_data; i++)
         {
             delete_data_from_file << ID_ARRAY[i] << ","
                                   << NAME_ARRAY[i] << ","
@@ -155,17 +151,18 @@ void delet_from_file()
 void show_from_file()
 {
     string line;
-    fstream showFromFile;
-    showFromFile.open("DATA-BASE.txt", ios::in);
-    if (showFromFile.is_open())
+    fstream ShowFromFile;
+    ShowFromFile.open("DATA-BASE.txt", ios::in);
+    if (ShowFromFile.is_open())
     {
         static_data = 0;
-        while (getline(showFromFile, line))
+        while (getline(ShowFromFile, line))
         {
             if (line.empty())
+            {
                 continue;
-
-            string fields[10];
+            }
+            string fields[100];
             string temp = "";
             int idx = 0;
 
@@ -179,7 +176,7 @@ void show_from_file()
                 }
                 else
                 {
-                    temp += line[i];  // A+L+I=ALI
+                    temp += line[i];
                 }
             }
             /*field ki index ma increment for loop sa mil rha ha or
@@ -200,14 +197,14 @@ void show_from_file()
 
             static_data++;
         }
-        showFromFile.close();
+        ShowFromFile.close();
     }
 }
-// <<<3>>> announcement file handling
+//  announcement file handling
 void save_announcements()
 {
     fstream ANNOUNCEMENT_File;
-    ANNOUNCEMENT_File.open("ANNOUNCEMENTS.txt", ios::out);
+    ANNOUNCEMENT_File.open("ANNOUNCEMENTS.txt", ios::app);
     if (ANNOUNCEMENT_File.is_open())
     {
         for (int i = 0; i < 3; i++)
@@ -217,7 +214,7 @@ void save_announcements()
         ANNOUNCEMENT_File.close();
     }
 }
-void load_announcements()
+void show_from_announcements()
 {
     string line;
     fstream ANNOUNCEMENT_File;
@@ -227,16 +224,18 @@ void load_announcements()
         for (int i = 0; i < 3; i++)
         {
             if (getline(ANNOUNCEMENT_File, line))
+            {
                 PROF_ANNOUNCEMENT_ARRAY[i] = line;
+            }
         }
         ANNOUNCEMENT_File.close();
     }
 }
-// <<<3>>> feedback file handling
+
 void save_feedback()
 {
     fstream FEEDBACK_FILE;
-    FEEDBACK_FILE.open("FEEDBACK.txt", ios::out);
+    FEEDBACK_FILE.open("FEEDBACK.txt", ios::app);
     if (FEEDBACK_FILE.is_open())
     {
         for (int i = 0; i < 3; i++)
@@ -246,7 +245,7 @@ void save_feedback()
         FEEDBACK_FILE.close();
     }
 }
-void load_feedback()
+void show_from_feedback()
 {
     string line;
     fstream FEEDBACK_FILE;
@@ -256,7 +255,9 @@ void load_feedback()
         for (int i = 0; i < 3; i++)
         {
             if (getline(FEEDBACK_FILE, line))
+            {
                 STUD_FEEDBACK_ARRAY[i] = line;
+            }
         }
         FEEDBACK_FILE.close();
     }
@@ -325,19 +326,18 @@ void PROFESSOR_HEADER()
 void PROFESSORS_menu()
 {
     cout << "-------------------------------------------------------------";
-    cout << "\n 1.  REGISTER NEW STUDENT"; // done file handling
-    cout << "\n 2.  VIEW ALL REGISTERED STUDENTS"; //done file handling
+    cout << "\n 1.  REGISTER NEW STUDENT";
+    cout << "\n 2.  VIEW ALL REGISTERED STUDENTS";
     cout << "\n 3.  UPDATE SUBJECT MARKS"; //  ??
-    cout << "\n 4.  SORT STUDENT BY GPA"; // don't require file handling
-    cout << "\n 5.  SEARCH STUDENT COMPLETE RECORD"; // don't require file handling
-    cout << "\n 6.  POST NEW ANNOUNCEMENT"; // done file handling
-    cout << "\n 7.  VIEW CLASS PERFORMANCE"; // don't require file handling
-    cout << "\n 8.  DELETE/REMOVE STUDENT RECORD"; // done file handling
-    cout << "\n 9.  READ STUDENTS FEEDBACK"; // done file handling
-    cout << "\n 10. LOGOUT AND RETURN TO PORTAL" << endl; // don't require file handling
+    cout << "\n 4.  SORT STUDENT BY GPA";
+    cout << "\n 5.  SEARCH STUDENT COMPLETE RECORD";
+    cout << "\n 6.  POST NEW ANNOUNCEMENT";
+    cout << "\n 7.  VIEW CLASS PERFORMANCE";
+    cout << "\n 8.  DELETE/REMOVE STUDENT RECORD";
+    cout << "\n 9.  READ STUDENTS FEEDBACK";
+    cout << "\n 10. LOGOUT AND RETURN TO PORTAL" << endl;
     cout << "-------------------------------------------------------------\n";
 }
-// end of professor menu
 //  --------------------------------- STUDENT HEADER & MENU ---------------------------------
 
 void student_header()
@@ -363,7 +363,6 @@ void student_menu()
     cout << "\n 10. LOGOUT AND EXIT PORTAL" << endl;
     cout << "-------------------------------------------------------------\n";
 }
-// end of stduent menu
 //  --------------------------------- SORTING ---------------------------------
 
 void swaping_sorting_gpa()
@@ -374,43 +373,40 @@ void swaping_sorting_gpa()
         {
             if (GPA_ARRAY[i] < GPA_ARRAY[j])
             {
-                // swap names
                 string temp_name = NAME_ARRAY[i];
                 NAME_ARRAY[i] = NAME_ARRAY[j];
                 NAME_ARRAY[j] = temp_name;
-                // swap gpa
+
                 float temp_gpa = GPA_ARRAY[i];
                 GPA_ARRAY[i] = GPA_ARRAY[j];
                 GPA_ARRAY[j] = temp_gpa;
-                // swap subject 1
+
                 string temp_sub1 = SUBJECT_1_ARRAY[i];
                 SUBJECT_1_ARRAY[i] = SUBJECT_1_ARRAY[j];
                 SUBJECT_1_ARRAY[j] = temp_sub1;
-                // swap subject 2
+
                 string temp_sub2 = SUBJECT_2_ARRAY[i];
                 SUBJECT_2_ARRAY[i] = SUBJECT_2_ARRAY[j];
                 SUBJECT_2_ARRAY[j] = temp_sub2;
-                // swap subject 3
+
                 string temp_sub3 = SUBJECT_3_ARRAY[i];
                 SUBJECT_3_ARRAY[i] = SUBJECT_3_ARRAY[j];
                 SUBJECT_3_ARRAY[j] = temp_sub3;
-                // swap MARKS_subject 1
+
                 string MARKS_temp_sub1 = MARkS_SUBJECT_1_ARRAY[i];
                 MARkS_SUBJECT_1_ARRAY[i] = MARkS_SUBJECT_1_ARRAY[j];
                 MARkS_SUBJECT_1_ARRAY[j] = MARKS_temp_sub1;
-                // swap MARKS_subject 2
                 string MARKS_temp_sub2 = MARkS_SUBJECT_2_ARRAY[i];
                 MARkS_SUBJECT_2_ARRAY[i] = MARkS_SUBJECT_2_ARRAY[j];
                 MARkS_SUBJECT_2_ARRAY[j] = MARKS_temp_sub2;
-                // swap MARKS_subject 3
+
                 string MARKS_temp_sub3 = MARkS_SUBJECT_3_ARRAY[i];
                 MARkS_SUBJECT_3_ARRAY[i] = MARkS_SUBJECT_3_ARRAY[j];
                 MARkS_SUBJECT_3_ARRAY[j] = MARKS_temp_sub3;
-                // swap id
+
                 int temp_id = ID_ARRAY[i];
                 ID_ARRAY[i] = ID_ARRAY[j];
                 ID_ARRAY[j] = temp_id;
-                // swap attendence
                 float temp_attendence = ATTENDENCE_ARRAY[i];
                 ATTENDENCE_ARRAY[i] = ATTENDENCE_ARRAY[j];
                 ATTENDENCE_ARRAY[j] = temp_attendence;
@@ -422,7 +418,7 @@ void swaping_sorting_gpa()
 // --------------------------------- PROFFESSOR FUNCTIONS ---------------------------------
 
 void register_new_student()
-{ // REGISTER NEW STUDENT
+{
     system("CLS");
     cout << "--------------------------------------------" << endl;
     cout << "          REGISTER NEW STUDENT              " << endl;
@@ -464,10 +460,10 @@ void register_new_student()
 }
 
 void view_all_students()
-{ // VIEW ALL REGISTERED STUDENTS
+{
     system("CLS");
     headings();
-    for (int i = 0; i < static_data; i++) // <<<4>>>
+    for (int i = 0; i < static_data; i++)
     {
         single_stud_record(i);
     }
@@ -476,7 +472,7 @@ void view_all_students()
 }
 
 void update_subject_marks()
-{ // UPDATE SUBJECT MARKS
+{
     system("CLS");
     cout << "ENTER NAME YOU WANT TO SEARCH:";
     string name;
@@ -512,7 +508,7 @@ void update_subject_marks()
         cout << "FIRST SUBJECT'S MARKS IS:" << MARkS_SUBJECT_1_ARRAY[index] << endl;
         cout << "SECOND SUBJECT'S MARKS IS:" << MARkS_SUBJECT_2_ARRAY[index] << endl;
         cout << "THIRD SUBJECT'S MARKS IS:" << MARkS_SUBJECT_3_ARRAY[index] << endl;
-        delet_from_file(); // <<<5>>>
+        delet_from_file();
     }
     else
     {
@@ -569,7 +565,7 @@ void announcement_board()
     cout << "-----------------------------------------------------------------------------------\n";
 }
 void post_announcement()
-{ // POST NEW ANNOUNCEMENT
+{
     system("CLS");
     announcement_board();
     int announcement_choice = 0;
@@ -602,7 +598,7 @@ void post_announcement()
     }
     system("CLS");
     cout << "UPDATED ANNONUCEMENT BOARD:" << endl;
-    save_announcements(); // <<<6>>>
+    save_announcements();
     announcement_board();
     wait();
 }
@@ -627,7 +623,7 @@ void view_class_performance()
     wait();
 }
 void read_students_feedback()
-{ // READ STUDENTS FEEDBACK
+{
     system("CLS");
     cout << "--------------------------------------------" << endl;
     cout << "               FEEDBACK BOARD              " << endl;
@@ -641,7 +637,7 @@ void read_students_feedback()
     wait();
 }
 void delete_student_record()
-{ // DELETE/REMOVE STUDENT RECORD
+{
     system("CLS");
     cout << "ENTER NAME YOU WANT TO DELETE:";
     string name;
@@ -660,7 +656,6 @@ void delete_student_record()
         cout << endl;
         cout << "-----------------------------------------------------------------------------------\n";
 
-        // deletion from here
         NAME_ARRAY[index] = "";
         SUBJECT_1_ARRAY[index] = "";
         SUBJECT_2_ARRAY[index] = "";
@@ -712,7 +707,6 @@ void professor_login()
             int prof_choice = 0;
             while (prof_choice != 10)
             {
-                // PROFESSOR MENU
                 system("CLS");
                 PROFESSORS_menu();
                 cout << "WHAT IS YOUR CHOICE: ";
@@ -754,7 +748,7 @@ void professor_login()
                     read_students_feedback();
                 }
                 else if (prof_choice == 10)
-                { // LOGOUT AND RETURN TO PORTAL
+                {
                     cout << "            <<< LOGOUT... >>>            " << endl;
                     wait();
                 }
@@ -782,9 +776,9 @@ void professor_login()
 }
 
 // --------------------------------- STUDENT FUNCTIONS ---------------------------------
-// start
+
 void view_profile(int index)
-{ // VIEW PROFILE
+{
     system("CLS");
     cout << "YOUR DATA IS:" << endl;
     headings();
@@ -794,7 +788,7 @@ void view_profile(int index)
 }
 
 void view_registered_courses(int index)
-{ // VIEW REGISTERED COURSES
+{
     system("CLS");
     cout << "REGISTERED SUBJECTS ARE:" << endl;
     cout << SUBJECT_1_ARRAY[index] << "\n"
@@ -804,7 +798,7 @@ void view_registered_courses(int index)
 }
 
 void view_my_grades(int index)
-{ // VIEW MY GRADES/MARKS
+{
     system("CLS");
     cout << "MARKS ARE:" << endl;
     cout << SUBJECT_1_ARRAY[index] << " MARKS ARE:" << MARkS_SUBJECT_1_ARRAY[index] << endl;
@@ -814,14 +808,14 @@ void view_my_grades(int index)
 }
 
 void check_attendance(int index)
-{ // CHECK ATTENDANCE PERCENTAGE
+{
     system("CLS");
     cout << "YOUR ATTENDENCE IS:" << ATTENDENCE_ARRAY[index] << endl;
     wait();
 }
 //
 void view_teacher_announcements()
-{ // VIEW TEACHER ANNOUNCEMENTS
+{
     system("CLS");
     for (int i = 0; i < 3; i++)
     {
@@ -831,7 +825,7 @@ void view_teacher_announcements()
 }
 
 void unregister_subject(int index)
-{ // UNREGISTER SUBJECTS
+{
     system("CLS");
     cout << "\n--- UNREGISTER A SUBJECT ---" << endl;
     cout << "1. " << SUBJECT_1_ARRAY[index] << endl;
@@ -860,12 +854,12 @@ void unregister_subject(int index)
     cout << SUBJECT_1_ARRAY[index] << "\n"
          << SUBJECT_2_ARRAY[index] << "\n"
          << SUBJECT_3_ARRAY[index] << endl;
-    delet_from_file(); // <<<7>>>
+    delet_from_file();
     wait();
 }
 
 void submit_feedback()
-{ // SUBMIT FEEDBACK FOR TEACHER
+{
     system("CLS");
     {
         int feedback_choice;
@@ -900,13 +894,13 @@ void submit_feedback()
             cout << i + 1 << ": " << STUD_FEEDBACK_ARRAY[i] << endl;
         }
         cout << "-----------------------------------------------------------------------------------\n";
-        save_feedback(); // <<<8>>>
+        save_feedback();
     }
     wait();
 }
 
 void calculate_gpa()
-{ // CALCULATE GPA
+{
     system("CLS");
     float sub1, sub2, sub3, gpa_calculator;
     cout << "-----------------------------------------------------------------------------------\n";
@@ -950,7 +944,7 @@ void calculate_gpa()
 }
 
 void view_contact_directory()
-{ // VIEW UNIVERSITY CONTACT DIRECTORY
+{
     system("CLS");
     cout << "\n------------------------------------------------------------" << endl;
     cout << "              UNIVERSITY CONTACT DIRECTORY                " << endl;
@@ -965,7 +959,6 @@ void view_contact_directory()
     cout << "------------------------------------------------------------" << endl;
     wait();
 }
-// acces by ID
 void student_portal_by_id()
 {
     student_header();
@@ -991,7 +984,7 @@ void student_portal_by_id()
         int stud_choice = 0;
         while (stud_choice != 10)
         {
-            // STUDENT MENU
+
             system("CLS");
             student_menu();
             cout << "WHAT IS YOUR CHOICE: ";
@@ -1033,7 +1026,7 @@ void student_portal_by_id()
                 view_contact_directory();
             }
             else if (stud_choice == 10)
-            { // LOGOUT AND EXIT TO PORTAL
+            {
                 cout << "            <<< LOGOUT... >>>            " << endl;
                 wait();
             }

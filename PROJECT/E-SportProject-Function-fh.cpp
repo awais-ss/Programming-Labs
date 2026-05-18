@@ -17,7 +17,7 @@ void show_from_file();
 //==========PROTOTYPE END================
 
 //==========DATA STRUCTURE START=========
-int a = 0; // file se load hoga
+int a = 0;
 int user_choice;
 string arr_player_name[1000];
 int arr_player_age[1000];
@@ -37,7 +37,6 @@ int main()
     cout << "          =========================================" << endl
          << endl;
 
-    //  win_rate file se load hoti hai show_from_file mein
     while (user_choice != 3)
     {
         cout << "SELECT THE OPTION " << endl;
